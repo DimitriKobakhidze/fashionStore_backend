@@ -10,3 +10,18 @@ exports.productsData = (req, res) => {
         .send({ msg: "Some error occurred while retrieving products." });
     });
 };
+
+exports.addProduct = (req, res) => {
+  const { name, price } = req.body.product;
+
+  const newProduct = new Product(null, name, price);
+  newProduct
+    .save()
+    .then(() => res.status(200).send({ msg: "Product added successfully." }))
+    .catch((err) => {
+      console.log(err);
+      res
+        .status(500)
+        .send({ msg: "Some error occurred while adding product." });
+    });
+};

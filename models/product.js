@@ -10,4 +10,11 @@ module.exports = class Product {
   static getAllProducts() {
     return db.query("SELECT * FROM  products");
   }
+
+  save() {
+    return db.query(
+      "INSERT INTO products (product_name,price) VALUES ($1,$2)",
+      [this.name, this.price]
+    );
+  }
 };
