@@ -11,6 +11,10 @@ module.exports = class Product {
     return db.query("SELECT * FROM  products");
   }
 
+  static getById(id) {
+    return db.query("SELECT * from products WHERE id = $1", [id]);
+  }
+
   save() {
     return db.query(
       "INSERT INTO products (product_name,price) VALUES ($1,$2)",

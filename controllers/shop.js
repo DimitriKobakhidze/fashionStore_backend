@@ -25,3 +25,16 @@ exports.addProduct = (req, res) => {
         .send({ msg: "Some error occurred while adding product." });
     });
 };
+
+exports.productById = (req, res) => {
+  const { id } = req.params;
+
+  Product.getById(id)
+    .then((data) => res.status(200).send(data.rows))
+    .catch((err) => {
+      console.log(err);
+      res
+        .status(500)
+        .send({ msg: "Some error occurred while retrieving product." });
+    });
+};
